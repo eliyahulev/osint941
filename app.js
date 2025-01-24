@@ -1,4 +1,5 @@
 import dotenv from 'dotenv';
+import chalk from 'chalk';
 import { TelegramClient } from 'telegram';
 import { StringSession } from 'telegram/sessions/index.js';
 import input from 'input';
@@ -28,7 +29,7 @@ const config = {
     targetChannels: channels['harhevron'],
     keywords: keywords,
     outputChannelId: process.env.OUTPUT_CHANNEL_ID,
-    maxMessageLength: 280,
+    maxMessageLength: 500,
 
 };
 
@@ -45,7 +46,7 @@ const stringSession = new StringSession(process.env.TELEGRAM_SESSION || '');
 
 // Message deduplication cache
 const processedMessages = new Set();
-const MESSAGE_CACHE_TIMEOUT = 5 * 60 * 1000; // 5 minutes
+const MESSAGE_CACHE_TIMEOUT = 10 * 60 * 1000; // 10 minutes
 
 async function translateAndShortenMessage(text) {
     try {
@@ -63,7 +64,7 @@ async function translateAndShortenMessage(text) {
 
         return response.choices[0].message.content;
     } catch (error) {
-        console.log('Error in translation:', error);
+        console.log(chalk.red('Error in translation:', error));
         logger.error('Error in translation:', error);
         throw error;
     }
@@ -105,13 +106,17 @@ async function processMessage(message, channelUsername, client) {
 
         const processedText = await translateAndShortenMessage(message.message);
         const messageLink = `https://t.me/${channelUsername}/${message.id}`;
+        const processedTextReversed = processedText.split('').reverse().join('');
 
         // Send translated message
         await client.sendMessage(config.outputChannelId, {
             message: `${processedText}\n\n🔗 Original: ${messageLink}`
         });
-
-        console.log(`📝 Translated & Shortened Message:\n${processedText}\n\n🔗 Original: ${messageLink}`);
+        // show the current time
+        const date = new Date().toLocaleDateString('he-IL', { timeZone: 'Asia/Jerusalem' });
+        const time = new Date().toLocaleTimeString('he-IL', { timeZone: 'Asia/Jerusalem' });
+        console.log(chalk.bgCyan(`${date} --- ${time}`));
+        console.log(`Message:\n${processedTextReversed}\n\n🔗 Original: \n${messageLink}`);
 
         logger.info('Message processed successfully', {
             messageId: message.id,
@@ -129,6 +134,7 @@ async function processMessage(message, channelUsername, client) {
 
 async function monitorChannels(client) {
     try {
+
         // Get channel entities
         const channels = await Promise.all(
             config.targetChannels.map(username =>
