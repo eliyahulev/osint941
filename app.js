@@ -171,6 +171,7 @@ async function main() {
             connectionRetries: 5,
         });
 
+
         // Start client
         await client.start({
             phoneNumber: async () => await input.text('Please enter your phone number: '),
@@ -178,6 +179,7 @@ async function main() {
             phoneCode: async () => await input.text('Please enter the code you received: '),
             onError: (err) => logger.error('Connection error:', err),
         });
+        console.log('Session number:', client.session.save());
 
         await monitorChannels(client);
         logger.info('UserBot started successfully');
