@@ -27,10 +27,10 @@ const createMessageId = (message, channelUsername) => {
 }
 
 const processMessage = async (message, channelUsername, client) => {
-    console.log(message.message);
+    logger.verbose(message.message);
     // Check if message contains keywords
     if (!containsKeywords(message.message)) {
-        console.log(`${message.message} does not contain keywords`);
+        logger.debug(`${message.message} does not contain keywords`);
         return;
     }
     try {
@@ -38,7 +38,7 @@ const processMessage = async (message, channelUsername, client) => {
 
         // Check if message was already processed
         if (processedMessages.has(messageId)) {
-            console.log('Skipping duplicate message:', messageId);
+            logger.debug('Skipping duplicate message:', messageId);
             return;
         }
 
@@ -47,7 +47,6 @@ const processMessage = async (message, channelUsername, client) => {
         setTimeout(() => {
             processedMessages.delete(messageId);
         }, config.messageCacheTimeout);
-
 
 
         const processedText = await textProcessor(message.message);
@@ -61,15 +60,14 @@ const processMessage = async (message, channelUsername, client) => {
         // show the current time
         const date = new Date().toLocaleDateString('he-IL', { timeZone: 'Asia/Jerusalem' });
         const time = new Date().toLocaleTimeString('he-IL', { timeZone: 'Asia/Jerusalem' });
-        console.log(`${date} --- ${time}`);
-        console.log(`Message:\n${processedTextReversed}\n\n🔗 Original: \n${messageLink}`);
+        logger.verbose(`${date} --- ${time}`);
+        logger.verbose(`Message:\n${processedTextReversed}\n\n🔗 Original: \n${messageLink}`);
 
         logger.info('Message processed successfully', {
             messageId: message.id,
             channelUsername
         });
     } catch (error) {
-        console.log('Error processing message:', error);
         logger.error('Error processing message:', {
             error,
             messageId: message.id,
@@ -102,7 +100,6 @@ const monitorChannels = async (client) => {
 
         // Register event handler only once
         client.addEventHandler(eventHandler);
-
         logger.info('Started monitoring channels:', config.targetChannels);
     } catch (error) {
         logger.error('Error setting up channel monitoring:', error);
@@ -110,7 +107,7 @@ const monitorChannels = async (client) => {
     }
 }
 
-const main = async () => {
+const app = async () => {
     try {
         // Initialize client
         const client = new TelegramClient(stringSession, apiId, apiHash, {
@@ -125,7 +122,7 @@ const main = async () => {
             phoneCode: async () => await input.text('Please enter the code you received: '),
             onError: (err) => logger.error('Connection error:', err),
         });
-        //console.log('Session number:', client.session.save());
+        logger.info('Session number:', client.session.save());
 
         await monitorChannels(client);
         logger.info('UserBot started successfully');
@@ -137,4 +134,4 @@ const main = async () => {
         process.exit(1);
     }
 }
-main();
+app();
