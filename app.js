@@ -8,10 +8,6 @@ import { textProcessor } from './src/utils/textProcessor.js';
 
 dotenv.config();
 
-
-
-
-
 // Telegram client configuration
 const apiId = parseInt(process.env.TELEGRAM_API_ID);
 const apiHash = process.env.TELEGRAM_API_HASH;
