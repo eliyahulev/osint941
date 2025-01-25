@@ -5,7 +5,6 @@ export const channels = {
         'khalelnews',
         'aroubcamb',
         'aljanoop48',
-        'DuraCity',
         'doura2000',
         'From_hebron',
         'al_fawwar',
@@ -15,7 +14,7 @@ export const channels = {
         'alsamou_alhadth',
         'From_hebron',
         'saeare',
-        'osint941test'
+        'osint941bot'
     ],
     'menashe': [],
     'binyamin': []
