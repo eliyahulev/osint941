@@ -14,7 +14,6 @@ export const targetChannels = {
         'alsamou_alhadth',
         'From_hebron',
         'saeare',
-        'osint941bot'
     ],
     'menashe': [],
     'binyamin': []
