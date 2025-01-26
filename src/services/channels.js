@@ -13,8 +13,7 @@ export const channels = {
         'HebronNewss',
         'alsamou_alhadth',
         'From_hebron',
-        'saeare',
-        'osint941bot'
+        'saeare'
     ],
     'menashe': [],
     'binyamin': []
