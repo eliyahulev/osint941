@@ -8,7 +8,7 @@ const openai = new OpenAI({
     apiKey: config.apiKey
 });
 
-export const textProcessor = async (text, maxMessageLength = 150) => {
+export const createTextProcessor = async (text, maxMessageLength = 150) => {
     try {
         const response = await openai.chat.completions.create({
             model: "gpt-4o-mini",
@@ -28,3 +28,4 @@ export const textProcessor = async (text, maxMessageLength = 150) => {
         throw error;
     }
 };
+

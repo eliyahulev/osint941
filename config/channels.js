@@ -1,4 +1,4 @@
-export const channels = {
+export const targetChannels = {
     'harhevron': [
         'HebMix',
         'vipdahrya',

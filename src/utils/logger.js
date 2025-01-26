@@ -7,8 +7,17 @@ const levelColors = {
     info: 'yellow',
     debug: 'green',
     verbose: 'magenta',
+    silly: 'cyan',
 };
 
+const levelsNames = {
+    error: 'ERROR',
+    warn: 'WARN',
+    info: 'INFO',
+    debug: 'DEBUG',
+    verbose: 'MESSAGE',
+    silly: 'MISC',
+};
 
 const consoleFormat = winston.format.combine(
     winston.format.timestamp({
@@ -17,13 +26,13 @@ const consoleFormat = winston.format.combine(
     winston.format.printf(({ level, message, timestamp }) => {
         const color = levelColors[level] || 'white';
         const coloredTimestamp = chalk[color](`[${timestamp}]`);
-        const coloredLevel = chalk[color](`[${level.toUpperCase()}]`);
+        const coloredLevel = chalk[color](`[${levelsNames[level]}]`);
         return `${coloredTimestamp} ${coloredLevel}: ${message}`;
     })
 );
 
 export const logger = winston.createLogger({
-    level: 'verbose',
+    level: 'silly',
     transports: [
         new winston.transports.File({ filename: 'logs/error.log', level: 'error' }),
         new winston.transports.File({ filename: 'logs/combined.log' }),
