@@ -1,54 +1,91 @@
-import { createTextProcessor } from './text-processor.js';
-import { filterMessageByKeywords } from './filter-messages.js';
-
+import { createTextProcessor } from "./text-processor.js";
+import { filterMessageByKeywords } from "./filter-messages.js";
 
 export const createMessageHandler = (logger, config) => {
-    const processedMessages = new Set();
+  const processedMessages = new Set();
 
-    const createMessageId = (message, channelUsername) =>
-        `${channelUsername}_${message.id}_${message.date}`;
+  const createMessageId = (message, channelUsername) =>
+    `${channelUsername}_${message.id}_${message.date}`;
 
-    return async (message, channelUsername, client) => {
+  const getChannelInfo = (channelUsername) => {
+    return config.targetChannels[channelUsername] || null;
+  };
 
-        // Filter messages by keywords and exclude keywords
-        if (!filterMessageByKeywords(message, config, logger)) {
-            return
-        }
+  return async (message, channelUsername, client) => {
+    // Filter messages by keywords and exclude keywords
+    const foundKeywords = filterMessageByKeywords(message, config, logger);
+    if (!foundKeywords) {
+      return;
+    }
 
-        const messageId = createMessageId(message, channelUsername);
-        // Prevent duplicate processing
-        if (processedMessages.has(messageId)) {
-            logger.debug('Skipping duplicate message');
-            return;
-        }
+    const messageId = createMessageId(message, channelUsername);
+    logger.debug(`Generated message ID: ${messageId}`);
+    // Prevent duplicate processing
+    if (processedMessages.has(messageId)) {
+      logger.debug("Skipping duplicate message");
+      return;
+    }
 
-        // Cache message processing
-        processedMessages.add(messageId);
-        setTimeout(() => processedMessages.delete(messageId), config.messageCacheTimeout);
+    // Cache message processing
+    processedMessages.add(messageId);
+    setTimeout(
+      () => processedMessages.delete(messageId),
+      config.messageCacheTimeout
+    );
 
-        try {
-            const processedText = await createTextProcessor(message.message);
+    try {
+      const processedText = await createTextProcessor(message.message);
+      const messageLink = `https://t.me/${channelUsername}/${message.id}`;
+      const processedTextReversed = processedText.split("").reverse().join("");
 
-            const messageLink = `https://t.me/${channelUsername}/${message.id}`;
-            const processedTextReversed = processedText.split('').reverse().join('');
+      // Determine which output channel to use
+      const channelInfo = getChannelInfo(channelUsername);
+      if (!channelInfo) {
+        logger.warn(`Unknown channel type for ${channelUsername}`);
+        return;
+      }
 
-            //Send processed message
-            await client.sendMessage(config.outputChannelId, {
-                message: `${processedText}\n\n🔗 Original: ${messageLink}`
-            });
+      const outputChannelId = config.outputChannels[channelInfo.region];
+      if (!outputChannelId) {
+        logger.warn(`No output channel configured for ${channelInfo.region}`);
+        return;
+      }
 
-            logger.verbose(`Message:\n${processedTextReversed}\n\n🔗 Original: \n${messageLink}`);
-            logger.info('Message processed successfully', {
-                messageId: message.id,
-                channelUsername,
-                processedText
-            });
-        } catch (error) {
-            logger.error('Error processing message', {
-                error,
-                messageId: message.id,
-                channelUsername
-            });
-        }
-    };
+      // Format the keyword matches for display
+      const keywordMatches = foundKeywords
+        .map(({ arabic, hebrew }) => `<b>${arabic}</b> ➜ <b>${hebrew}</b>`)
+        .join("\n");
+
+      // Create a formatted message with all the required information
+      const formattedMessage = `<strong>📝 מילות מפתח:</strong>\n${keywordMatches}\n\n<strong>📢 ערוץ מקור:</strong> <code>@${channelUsername}</code>\n<strong>📍 אזור:</strong> <code>${channelInfo.area}</code>\n\n<strong>💬 הודעה מעובדת:</strong>\n${processedText}\n\n<strong>🔗 הודעה מקורית:</strong> <a href="${messageLink}">${messageLink}</a>`;
+
+      //Send processed message to the appropriate channel
+      await client.sendMessage(outputChannelId, {
+        message: formattedMessage,
+        parseMode: "html",
+      });
+
+      // Log the combined message with region and keywords
+      logger.info(
+        `Message from ${channelInfo.region.toUpperCase()} region. Found keyword matches: ${keywordMatches}`
+      );
+      logger.verbose(
+        `Message from ${channelInfo.region.toUpperCase()} region:\n${processedTextReversed}\n\n🔗 Original: \n${messageLink}`
+      );
+      logger.info("Message processed successfully", {
+        messageId: message.id,
+        channelUsername,
+        channelType: channelInfo.region.toUpperCase(),
+        processedText,
+      });
+    } catch (error) {
+      logger.error("Error processing message", {
+        error,
+        messageId: message.id,
+        channelUsername,
+        channelType:
+          getChannelInfo(channelUsername)?.region.toUpperCase() || "UNKNOWN",
+      });
+    }
+  };
 };
