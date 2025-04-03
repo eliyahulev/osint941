@@ -6,7 +6,7 @@ A powerful Node.js application for automated Telegram channel monitoring, messag
 
 - **Telegram Channel Monitoring**: Automatically monitors multiple Telegram channels for specific keywords
 - **AI-Powered Processing**:
-  - Translates messages using OpenAI's GPT-4
+  - Translates messages using OpenAI's gpt-4o-mini
   - Intelligently summarizes content while preserving key information
 - **Smart Deduplication**: Prevents processing duplicate messages
 - **Robust Logging**: Comprehensive logging system using Winston

@@ -57,7 +57,7 @@ export const createMessageHandler = (logger, config) => {
         .join("\n");
 
       // Create a formatted message with all the required information
-      const formattedMessage = `<strong>📝 מילות מפתח:</strong>\n${keywordMatches}\n\n<strong>📢 ערוץ מקור:</strong> <code>@${channelUsername}</code>\n<strong>📍 אזור:</strong> <code>${channelInfo.area}</code>\n\n<strong>💬 הודעה מעובדת:</strong>\n${processedText}\n\n<strong>🔗 הודעה מקורית:</strong> <a href="${messageLink}">${messageLink}</a>`;
+      const formattedMessage = `<strong>📝 מילות מפתח:</strong>\n ${keywordMatches}\n\n<strong>📢 ערוץ מקור:</strong> <code>@${channelUsername}</code>\n<strong>📍 אזור:</strong> <code>${channelInfo.area}</code>\n\n<strong>💬 הודעה מעובדת:</strong>\n${processedText}\n\n<strong>🔗 הודעה מקורית:</strong> <a href="${messageLink}">${messageLink}</a>`;
 
       //Send processed message to the appropriate channel
       await client.sendMessage(outputChannelId, {
@@ -70,7 +70,7 @@ export const createMessageHandler = (logger, config) => {
         `Message from ${channelInfo.region.toUpperCase()} region. Found keyword matches: ${keywordMatches}`
       );
       logger.verbose(
-        `Message from ${channelInfo.region.toUpperCase()} region:\n${processedTextReversed}\n\n🔗 Original: \n${messageLink}`
+        `Message from ${channelInfo.region.toUpperCase()} region:\n${processedTextReversed}`
       );
       logger.info("Message processed successfully", {
         messageId: message.id,
