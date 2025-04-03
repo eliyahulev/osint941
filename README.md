@@ -1,38 +1,43 @@
-# osint941
+# OSINT941 🔍
 
-## Overview
+A powerful Node.js application for automated Telegram channel monitoring, message translation, and summarization using AI.
 
-`osint941` is a Node.js application that monitors specific Telegram channels for messages containing certain keywords, translates and shortens these messages using OpenAI's GPT-4 model, and then posts the processed messages to a specified Telegram channel.
+## 🌟 Features
 
-## Features
+- **Telegram Channel Monitoring**: Automatically monitors multiple Telegram channels for specific keywords
+- **AI-Powered Processing**:
+  - Translates messages using OpenAI's GPT-4
+  - Intelligently summarizes content while preserving key information
+- **Smart Deduplication**: Prevents processing duplicate messages
+- **Robust Logging**: Comprehensive logging system using Winston
+- **Error Handling**: Graceful error handling and recovery
+- **Modern Stack**: Built with the latest Node.js features and ES modules
 
-- Monitors multiple Telegram channels for specific keywords.
-- Translates and shortens messages using OpenAI's GPT-4 model.
-- Logs processed messages and errors using Winston.
-- Deduplicates messages to avoid processing the same message multiple times.
-
-## Prerequisites
+## 📋 Prerequisites
 
 - Node.js (v14 or higher)
 - Telegram API credentials (API ID and API Hash)
 - OpenAI API key
+- A Telegram account with access to the channels you want to monitor
 
-## Installation
+## 🚀 Getting Started
 
-1. Clone the repository:
+1. **Clone the repository**
 
-   ```sh
+   ```bash
    git clone https://github.com/yourusername/osint941.git
    cd osint941
    ```
 
-2. Install the dependencies:
+2. **Install dependencies**
 
-   ```sh
+   ```bash
    npm install
    ```
 
-3. Create a [.env](http://_vscodecontentref_/1) file in the root directory and add your environment variables:
+3. **Configure environment variables**
+   Create a `.env` file in the root directory with the following variables:
+
    ```env
    TELEGRAM_API_ID=your_telegram_api_id
    TELEGRAM_API_HASH=your_telegram_api_hash
@@ -41,26 +46,67 @@
    OUTPUT_CHANNEL_ID=your_output_channel_id
    ```
 
-## Usage
-
-1. Start the application:
-
-   ```sh
+4. **Start the application**
+   ```bash
    npm start
    ```
 
-2. Follow the prompts to enter your Telegram phone number, password, and the code you receive.
+## ⚙️ Configuration
 
-## Configuration
+### Channel Configuration
 
-- The list of target channels is defined in [channels.js](http://_vscodecontentref_/2).
-- The list of keywords is defined in [keywords.js](http://_vscodecontentref_/3).
-- The maximum message length and other configurations are defined in the [config](http://_vscodecontentref_/4) object in [app.js](http://_vscodecontentref_/5).
+- Target channels are defined in `config/channels.js`
+- Customize keywords in `config/keywords.js`
+- Adjust message processing settings in `app.js`
 
-## Logging
+### Environment Variables
 
-- Processed messages and errors are logged to [combined.log](http://_vscodecontentref_/6) and [error.log](http://_vscodecontentref_/7) respectively.
+| Variable            | Description                                               |
+| ------------------- | --------------------------------------------------------- |
+| `TELEGRAM_API_ID`   | Your Telegram API ID                                      |
+| `TELEGRAM_API_HASH` | Your Telegram API Hash                                    |
+| `TELEGRAM_SESSION`  | Your Telegram session string                              |
+| `OPENAI_API_KEY`    | Your OpenAI API key                                       |
+| `OUTPUT_CHANNEL_ID` | ID of the channel where processed messages will be posted |
 
-## License
+## 📝 Logging
 
-This project is licensed under the MIT License. See the LICENSE file for details.# osint941
+The application uses Winston for logging with two main log files:
+
+- `logs/combined.log`: Contains all logs
+- `logs/error.log`: Contains only error logs
+
+## 🛠️ Development
+
+### Available Scripts
+
+- `npm start`: Start the application with nodemon for development
+- `npm run lint:fix`: Run ESLint with auto-fix
+
+### Project Structure
+
+```
+osint941/
+├── config/         # Configuration files
+├── src/           # Source code
+├── logs/          # Log files
+├── app.js         # Main application file
+├── package.json   # Project dependencies
+└── .env          # Environment variables
+```
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## ⚠️ Disclaimer
+
+This tool is for educational and research purposes only. Please ensure you comply with:
+
+- Telegram's Terms of Service
+- OpenAI's Usage Guidelines
+- Applicable laws and regulations regarding data collection and processing
