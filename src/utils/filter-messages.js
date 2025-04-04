@@ -71,7 +71,7 @@ export const filterMessageByKeywords = (message, config, logger) => {
   // Skip messages without keywords
   const foundKeywords = containsKeywords(message.message, config.keywords);
   if (foundKeywords.length === 0) {
-    logger.silly(`Message does not contain keywords`);
+    logger.silly('Message does not contain keywords');
     return false;
   }
 
@@ -82,7 +82,7 @@ export const filterMessageByKeywords = (message, config, logger) => {
       message.message.toLowerCase().includes(keyword.toLowerCase())
     )
   ) {
-    logger.silly(`Message contains excluded keywords`);
+    logger.silly('Message contains excluded keywords');
     return false;
   }
 

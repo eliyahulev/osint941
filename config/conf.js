@@ -1,7 +1,7 @@
-import dotenv from "dotenv";
-import process from "process";
-import { targetChannels } from "./channels.js";
-import { keywords, excludeKeywords } from "./keywords.js";
+import dotenv from 'dotenv';
+import process from 'process';
+import { targetChannels } from './channels.js';
+import { keywords, excludeKeywords } from './keywords.js';
 
 dotenv.config();
 

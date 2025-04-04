@@ -1,7 +1,8 @@
 {
   "scripts": {
     "start": "nodemon app.js",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "test:fuzzy": "node --test src/utils/filter-messages.test.js"
   },
   "dependencies": {
     "chalk": "^5.4.1",

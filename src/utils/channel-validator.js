@@ -29,7 +29,7 @@ export const validateChannels = async (client, logger, config) => {
     logger.warn(
       `Ignoring ${
         invalidChannels.length
-      } invalid channels: ${invalidChannels.join(", ")}`
+      } invalid channels: ${invalidChannels.join(', ')}`
     );
   }
 
