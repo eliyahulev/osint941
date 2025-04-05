@@ -1,4 +1,8 @@
 {
+  "name": "osint941",
+  "version": "1.1.2",
+  "description": "A telegram bot for monitoring and analyzing messages from various channels",
+  "main": "app.js",
   "scripts": {
     "start": "nodemon app.js",
     "lint:fix": "eslint . --fix",
