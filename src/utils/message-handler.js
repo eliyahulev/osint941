@@ -1,5 +1,5 @@
-import { createTextProcessor } from './text-processor.js';
-import { filterMessageByKeywords } from './filter-messages.js';
+import { createTextProcessor } from "./text-processor.js";
+import { filterMessageByKeywords } from "./filter-messages.js";
 
 export const createMessageHandler = (logger, config) => {
   const processedMessages = new Set();
@@ -22,7 +22,7 @@ export const createMessageHandler = (logger, config) => {
     logger.debug(`Generated message ID: ${messageId}`);
     // Prevent duplicate processing
     if (processedMessages.has(messageId)) {
-      logger.debug('Skipping duplicate message');
+      logger.debug("Skipping duplicate message");
       return;
     }
 
@@ -36,7 +36,7 @@ export const createMessageHandler = (logger, config) => {
     try {
       const processedText = await createTextProcessor(message.message);
       const messageLink = `https://t.me/${channelUsername}/${message.id}`;
-      const processedTextReversed = processedText.split('').reverse().join('');
+      const processedTextReversed = processedText.split("").reverse().join("");
 
       // Determine which output channel to use
       const channelInfo = getChannelInfo(channelUsername);
@@ -53,16 +53,16 @@ export const createMessageHandler = (logger, config) => {
 
       // Format the keyword matches for display
       const keywordMatches = foundKeywords
-        .map(({ arabic, hebrew }) => `<b>${arabic}</b> ❯ <b>${hebrew}</b>`)
-        .join('\n');
+        .map(({ arabic, hebrew }) => `${arabic} ❯ ${hebrew}`)
+        .join("\n");
 
       // Create a formatted message with all the required information
-      const formattedMessage = `<b>📝 מילות מפתח:</b>\n${keywordMatches}\n\n<b>📢 ערוץ מקור:</b> <code>@${channelUsername}</code>\n<b>📍 אזור:</b> <code>${channelInfo.area}</code>\n\n<b>💬 הודעה מעובדת:</b>\n${processedText}\n\n<b>🔗 הודעה מקורית:</b> <a href="${messageLink}">${messageLink}</a>`;
+      const formattedMessage = `${processedText}\n\n<b>📢 ערוץ:</b> <code>@${channelUsername}</code>\n<b>📍 אזור:</b> <code>${channelInfo.area}</code>\n<b>📝 מילות מפתח:</b>\n${keywordMatches}\n\n<b>🔗 הודעה מקורית:</b> <a href="${messageLink}">${messageLink}</a>`;
 
       //Send processed message to the appropriate channel
       await client.sendMessage(outputChannelId, {
         message: formattedMessage,
-        parseMode: 'html',
+        parseMode: "html",
       });
 
       // Log the combined message with region and keywords
@@ -72,19 +72,19 @@ export const createMessageHandler = (logger, config) => {
       logger.verbose(
         `Message from ${channelInfo.region.toUpperCase()} region:\n${processedTextReversed}`
       );
-      logger.info('Message processed successfully', {
+      logger.info("Message processed successfully", {
         messageId: message.id,
         channelUsername,
         channelType: channelInfo.region.toUpperCase(),
         processedText,
       });
     } catch (error) {
-      logger.error('Error processing message', {
+      logger.error("Error processing message", {
         error,
         messageId: message.id,
         channelUsername,
         channelType:
-          getChannelInfo(channelUsername)?.region.toUpperCase() || 'UNKNOWN',
+          getChannelInfo(channelUsername)?.region.toUpperCase() || "UNKNOWN",
       });
     }
   };
