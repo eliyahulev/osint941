@@ -53,11 +53,11 @@ export const createMessageHandler = (logger, config) => {
 
       // Format the keyword matches for display
       const keywordMatches = foundKeywords
-        .map(({ arabic, hebrew }) => `<b>${arabic}</b> ❯ <b>${hebrew}</b>`)
+        .map(({ arabic, hebrew }) => `${arabic} ❯ ${hebrew}`)
         .join("\n");
 
       // Create a formatted message with all the required information
-      const formattedMessage = `${processedText}\n\n<b>\n<b>📝 מילות מפתח:</b>\n${keywordMatches}\n\n<b>📢 ערוץ מקור:</b> <code>@${channelUsername}</code>\n<b>📍 אזור:</b> <code>${channelInfo.area}</code>\n\n🔗 הודעה מקורית:</b>\n <a href="${messageLink}">${messageLink}</a>`;
+      const formattedMessage = `${processedText}\n\n<b>📢 ערוץ:</b> <code>@${channelUsername}</code>\n<b>📍 אזור:</b> <code>${channelInfo.area}</code>\n<b>📝 מילות מפתח:</b>\n${keywordMatches}\n\n<b>🔗 הודעה מקורית:</b> <a href="${messageLink}">${messageLink}</a>`;
 
       //Send processed message to the appropriate channel
       await client.sendMessage(outputChannelId, {
