@@ -10,7 +10,7 @@ const openai = new OpenAI({
 export const createTextProcessor = async (text, maxMessageLength = 200) => {
   try {
     const response = await openai.chat.completions.create({
-      model: "gpt-4o",
+      model: "gpt-4o-mini",
       messages: [
         {
           role: "system",
