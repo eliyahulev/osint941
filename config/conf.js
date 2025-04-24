@@ -1,16 +1,18 @@
-import dotenv from 'dotenv';
-import process from 'process';
-import { targetChannels } from './channels.js';
-import { keywords, excludeKeywords } from './keywords.js';
+import dotenv from "dotenv";
+import process from "process";
+import { targetChannels } from "./channels.js";
+import { keywords, excludeKeywords } from "./keywords.js";
 
 dotenv.config();
 
 // Create a flat object of all channel usernames with their areas
 const allChannels = {};
-Object.entries(targetChannels).forEach(([region, channels]) => {
-  channels.forEach((channel) => {
-    allChannels[channel.name] = { region, area: channel.area };
-  });
+Object.entries(targetChannels).forEach(([region, group]) => {
+  if (group.active) {
+    group.channels.forEach((channel) => {
+      allChannels[channel.name] = { region, area: channel.area };
+    });
+  }
 });
 
 export const config = {

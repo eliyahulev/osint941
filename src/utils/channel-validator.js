@@ -16,20 +16,27 @@ export const validateChannels = async (client, logger, config) => {
     try {
       const channel = await client.getEntity(username);
       validChannels.push(channel);
-      logger.debug(`Channel @${username} is valid`);
+      logger.debug(
+        `Channel @${username} (${config.targetChannels[
+          username
+        ].region.toLocaleUpperCase()}) is valid`
+      );
     } catch (error) {
       invalidChannels.push(username);
       logger.warn(
-        `Channel @${username} does not exist or is not accessible: ${error.message}`
+        `Channel @${username} (${config.targetChannels[username].area} - ${config.targetChannels[username].region}) does not exist or is not accessible: ${error.message}`
       );
     }
   }
 
   if (invalidChannels.length > 0) {
     logger.warn(
-      `Ignoring ${
-        invalidChannels.length
-      } invalid channels: ${invalidChannels.join(', ')}`
+      `Ignoring ${invalidChannels.length} invalid channels: ${invalidChannels
+        .map(
+          (username) =>
+            `@${username} (${config.targetChannels[username].area} - ${config.targetChannels[username].region})`
+        )
+        .join(", ")}`
     );
   }
 
