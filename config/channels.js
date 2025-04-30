@@ -17,7 +17,6 @@ export const targetChannels = {
       { name: "alsamou_alhadth", area: "אל-סמוע" },
       { name: "From_hebron", area: "חברון" },
       { name: "saeare", area: "סעיר" },
-      { name: "osint941bot", area: "בדיקות" },
     ],
   },
   etzion: {
@@ -48,14 +47,15 @@ export const targetChannels = {
       { name: "baninaeim22", area: "בני נעים" },
       { name: "saeare", area: "סעיר שיוח" },
       { name: "S3EERR", area: "סעיר שיוח" },
+      { name: "osint941bot", area: "בדיקות" },
     ],
   },
   menashe: {
-    active: true,
+    active: false,
     channels: [],
   },
   binyamin: {
-    active: true,
+    active: false,
     channels: [],
   },
 };
