@@ -94,19 +94,3 @@ osint941/
 ├── package.json   # Project dependencies
 └── .env          # Environment variables
 ```
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## 📄 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## ⚠️ Disclaimer
-
-This tool is for educational and research purposes only. Please ensure you comply with:
-
-- Telegram's Terms of Service
-- OpenAI's Usage Guidelines
-- Applicable laws and regulations regarding data collection and processing
