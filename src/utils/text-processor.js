@@ -11,6 +11,7 @@ export const createTextProcessor = async (text, maxMessageLength = 200) => {
   try {
     const response = await openai.chat.completions.create({
       model: "gpt-4o",
+
       messages: [
         {
           role: "system",
@@ -21,6 +22,8 @@ export const createTextProcessor = async (text, maxMessageLength = 200) => {
               4. Maintain factual accuracy without adding opinions or interpretations.
               5. Keep all proper names and place names unchanged.
               6. Use standard Hebrew date and number formats.
+              7. do not respond with messeges such as "I'm sorry, I can't translate that" or "I'm sorry, I can't summarize that".
+              8. proccese messages even if they are very short.
               Make sure the translation is concise, accurate, and easy to understand.`,
         },
         {

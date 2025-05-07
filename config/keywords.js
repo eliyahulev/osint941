@@ -11,8 +11,8 @@ export const keywords = {
   حواجز: "מחסומים",
   مغلق: "סגור",
   مغلقون: "סגורים",
-  شهيد: "נפטר",
-  شهداء: "נפטרים",
+  شهيد: "שהיד",
+  شهداء: "שהדא",
   عملية: "פעולה",
   عمليات: "פעולות",
   عملية: "מבצע",
@@ -115,6 +115,9 @@ export const keywords = {
   تعزيزات: "חילות",
   درونات: "רחפנים",
   الدرون: "הרחפן",
+  جيب: "גיפ",
+  جيوب: "גיפים",
+  جيبين: "גיפים",
   test: "בדיקה",
 };
 
@@ -156,4 +159,46 @@ export const excludeKeywords = [
   "صنعاء", // צנעא
   " الرهائن", // בני ערובה
   "ترامب", // טראמפ
+  "بنيامين نتنياهو", // בנימין נתניהו – Prime Minister
+  "إسحاق هرتسوغ", // יצחק הרצוג – President
+  "يوآف غالانت", // יואב גלנט – Minister of Defense
+  "إيتمار بن غفير", // איתמר בן גביר – National Security Minister
+  "بتسلئيل سموتريتش", // בצלאל סמוטריץ' – Finance Minister
+  "يائير لابيد", // יאיר לפיד – Opposition Leader
+  "أفيغدور ليبرمان", // אביגדור ליברמן – Member of Knesset
+  "غدعون ساعر", // גדעון סער – Member of Knesset
+  "ميري ريغيف", // מירי רגב – Minister of Transportation
+  "أرييه درعي", // אריה דרעי – Shas party leader
+  "يوآف كيش", // יואב كיש – Minister of Education
+  "إيلي كوهين", // אלי כהן – Foreign Minister
+  "الرياض", // Riyadh – Saudi Arabia
+  "جدة", // Jeddah – Saudi Arabia
+  "مكة", // Mecca – Saudi Arabia
+  "المدينة المنورة", // Medina – Saudi Arabia
+  "دبي", // Dubai – UAE
+  "أبو ظبي", // Abu Dhabi – UAE
+  "الدوحة", // Doha – Qatar
+  "المنامة", // Manama – Bahrain
+  "الكويت", // Kuwait City – Kuwait
+  "بغداد", // Baghdad – Iraq
+  "البصرة", // Basra – Iraq
+  "أربيل", // Erbil – Iraq
+  "دمشق", // Damascus – Syria
+  "حلب", // Aleppo – Syria
+  "بيروت", // Beirut – Lebanon
+  "طرابلس", // Tripoli – Lebanon
+  "عمان", // Amman – Jordan
+  "الزرقاء", // Zarqa – Jordan
+  "القاهرة", // Cairo – Egypt
+  "الإسكندرية", // Alexandria – Egypt
+  "الخرطوم", // Khartoum – Sudan
+  "الدار البيضاء", // Casablanca – Morocco
+  "الرباط", // Rabat – Morocco
+  "تونس", // Tunis – Tunisia
+  "طرابلس", // Tripoli – Libya
+  "نواكشوط", // Nouakchott – Mauritania
+  "الجزائر", // Algiers – Algeria
+  "مسقط", // Muscat – Oman
+  "صنعاء", // Sanaa – Yemen
+  "عدن", // Aden – Yemen
 ];
