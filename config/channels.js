@@ -47,6 +47,7 @@ export const targetChannels = {
       { name: "baninaeim22", area: "בני נעים" },
       { name: "saeare", area: "סעיר שיוח" },
       { name: "S3EERR", area: "סעיר שיוח" },
+      { name: "Betfajaralhadth", area: "בית פגאר" },
       { name: "osint941bot", area: "בדיקות" },
     ],
   },
