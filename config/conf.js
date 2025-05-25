@@ -22,6 +22,7 @@ export const config = {
   outputChannels: {
     yehuda: process.env.YEHUDA_OUTPUT_CHANNEL_ID,
     etzion: process.env.ETZION_OUTPUT_CHANNEL_ID,
+    tulkarm: process.env.TULKARM_OUTPUT_CHANNEL_ID,
   },
   maxMessageLength: 500,
   messageCacheTimeout: 10 * 60 * 1000, // 10 minutes,
