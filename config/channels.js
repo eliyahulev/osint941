@@ -45,7 +45,6 @@ export const targetChannels = {
       { name: "alredalsrey", area: "טולכרם" },
       { name: "norshames", area: "נור שמס" },
       { name: "shuhada_palestine_1", area: "קופין" },
-      { name: "akhbarbaqaalshrqiatl", area: "בקה אל-שרקיה" },
       { name: "AhrarNoorShams", area: "נור שמס" },
       { name: "ahrartullkarm2", area: "טולכרם" },
       { name: "the_event1", area: "טולכרם" },
@@ -78,7 +77,6 @@ export const targetChannels = {
     channels: [
       { name: "tuqualhadath", area: "תקוע" },
       { name: "Teqoua_Now", area: "תקוע" },
-      { name: "bethlahem_alhadth", area: "בית לחם" },
       { name: "BethlehemCommunityCh", area: "בית לחם" },
       { name: "bethlehemnewss", area: "בית לחם" },
       { name: "Aidacamp67", area: "בית לחם" },
@@ -102,6 +100,7 @@ export const targetChannels = {
       { name: "saeare", area: "סעיר שיוח" },
       { name: "S3EERR", area: "סעיר שיוח" },
       { name: "Betfajaralhadth", area: "בית פגאר" },
+      { name: "abo_dis", area: "אבו דיס" },
       { name: "osint941bot", area: "בדיקות" },
     ],
   },

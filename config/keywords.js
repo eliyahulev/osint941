@@ -15,12 +15,10 @@ export const keywords = {
   شهداء: "שהדא",
   عملية: "פעולה",
   عمليات: "פעולות",
-  عملية: "מבצע",
-  عمليات: "מבצעים",
   شاباك: "שבכ",
   احتلال: "כיבוש",
-  محتل: "מוכבש",
-  محتلون: "מוכבשים",
+  محتل: "כבוש",
+  محتلون: "כבושים",
   شباب: "צעירים",
   طريق: "כביש",
   طرق: "כבישים",
@@ -201,4 +199,24 @@ export const excludeKeywords = [
   "مسقط", // Muscat – Oman
   "صنعاء", // Sanaa – Yemen
   "عدن", // Aden – Yemen
+  "طهران", // Tehran – Iran
+  "مشهد", // Mashhad – Iran
+  "أصفهان", // Isfahan – Iran
+  "شيراز", // Shiraz – Iran
+  "تبريز", // Tabriz – Iran
+  "قم", // Qom – Iran
+  "كرمانشاه", // Kermanshah – Iran
+  "كرمان", // Kerman – Iran
+  "رشت", // Rust – Iran
+  "زاهدان", // Zahedan – Iran
+  "أراك", // Arak – Iran
+  "همدان", // Hamadan – Iran
+  "يزد", // Yazd – Iran
+  "الأهواز", // Ahvaz – Iran
+  "بندر عباس", // Bandar Abbas – Iran
+  "قزوين", // Qazvin – Iran
+  "سنندج", // Saneh – Iran
+  "خرم آباد", // Khorramabad – Iran
+  "أورمية", // Urmia – Iran
+  "بوشهر", // Bushehr – Iran
 ];
