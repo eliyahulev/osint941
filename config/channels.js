@@ -1,6 +1,6 @@
 export const targetChannels = {
   tulkarm: {
-    active: true,
+    active: false,
     channels: [
       { name: "tulkarmi1", area: "טולכרם" },
       { name: "tulkarmi", area: "טולכרם" },
@@ -53,7 +53,7 @@ export const targetChannels = {
     ],
   },
   yehuda: {
-    active: false,
+    active: true,
     channels: [
       { name: "HebMix", area: "חברון" },
       { name: "vipdahrya", area: "דאהריה" },
